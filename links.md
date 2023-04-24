@@ -1,0 +1,2 @@
+- https://www.redhat.com/architect/what-type-it-architect-are-you
+- https://pubs.opengroup.org/architecture/o-aa-standard/?_ga=2.236860098.2112760203.1681800107-2005496978.1681800107
