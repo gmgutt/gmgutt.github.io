@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>randomized list</title>
+  <script>
+
+    function shuffle(a) {
+      
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      
+      return a;
+    }
+
+    window.addEventListener("load", () => {
+      
+      let params = new URL(document.location.toString()).searchParams;
+      let shuffledList = shuffle(params.getAll("name"));
+
+      // shuffledList.forEach((item) => document.write(item));
+      let uls = "";
+      for (let i = 0; i < shuffledList.length; i++) {
+        uls += "<li>" + shuffledList[i] + "</li>";
+      }
+
+      document.getElementById("peeps").innerHTML = uls;
+    });
+  </script>
+</head>
+<body>
+  <ul id="peeps"></ul>
+</body>
+</html>
