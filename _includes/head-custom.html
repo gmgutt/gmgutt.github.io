@@ -7,7 +7,7 @@
 <!-- link rel="shortcut icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}" -->
 <script src="https://unpkg.com/mermaid@8.9.3/dist/mermaid.min.js"></script>
 <script>
-  $(document).ready(function () {
+  document.addEventListener("DOMContentLoaded", (event) => {
     mermaid.initialize({
       startOnLoad:true,
       theme: "default",
