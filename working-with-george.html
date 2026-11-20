@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Working with George Gutt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --card: #ffffff;
+    --ink: #243b51;
+    --blue: #4a8fd8;
+    --muted: #5b6875;
+    --rule: #e8edf2;
+    --chip-ink: #4b5866;
+    --tag-blue-bg: #e8f1fb;
+    --tag-blue-ink: #2f6fb6;
+    --tag-green-bg: #e6f4ee;
+    --tag-green-ink: #2e7a62;
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101b26;
+      --card: #182634;
+      --ink: #e6edf4;
+      --blue: #7db3ec;
+      --muted: #a3b1bf;
+      --rule: #263646;
+      --chip-ink: #c3cfdb;
+      --tag-blue-bg: #1f3650;
+      --tag-blue-ink: #9cc6f2;
+      --tag-green-bg: #1b3a32;
+      --tag-green-ink: #8fd3b9;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101b26;
+    --card: #182634;
+    --ink: #e6edf4;
+    --blue: #7db3ec;
+    --muted: #a3b1bf;
+    --rule: #263646;
+    --chip-ink: #c3cfdb;
+    --tag-blue-bg: #1f3650;
+    --tag-blue-ink: #9cc6f2;
+    --tag-green-bg: #1b3a32;
+    --tag-green-ink: #8fd3b9;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Figtree", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 3rem;
+  }
+  h1, h2 {
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-variation-settings: "SOFT" 0, "WONK" 0;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    margin: 0;
+  }
+  h3, h4 { margin: 0; font-weight: 700; }
+
+  /* Hero */
+  header { text-align: center; }
+  h1 {
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    line-height: 1.02;
+  }
+  h1 .first { display: block; color: var(--blue); }
+  .chips {
+    list-style: none;
+    margin: 1.75rem auto 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.45rem;
+    max-width: 60rem;
+  }
+  .chips li {
+    background: var(--card);
+    color: var(--chip-ink);
+    font-weight: 500;
+    font-size: 0.82rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+  }
+
+  /* Sections */
+  .group { margin-top: 5.5rem; }
+  header + .group { margin-top: 3rem; }
+  .group > h2 {
+    font-size: clamp(2.1rem, 4.5vw, 3.1rem);
+    line-height: 1.05;
+    margin-bottom: 1.75rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 56rem) {
+    .grid.three { grid-template-columns: repeat(3, 1fr); }
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+  }
+  .card {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 2rem 1.75rem;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: var(--tag-blue-bg);
+    color: var(--tag-blue-ink);
+    margin-bottom: 1rem;
+  }
+  .tag.green { background: var(--tag-green-bg); color: var(--tag-green-ink); }
+  .card h3 {
+    font-size: 1.4rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+  .card > p { margin: 0; color: var(--muted); }
+  ul.points { list-style: none; margin: 0; padding: 0; }
+  ul.points li {
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  ul.points li:first-child { border-top: 0; padding-top: 0.25rem; }
+  ul.points h4 { font-size: 1.02rem; margin-bottom: 0.2rem; }
+  ul.points p { margin: 0; color: var(--muted); }
+
+  footer {
+    margin-top: 4rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1><span class="first">George Gutt,</span> Director, Software Delivery and Architecture.</h1>
+    <ul class="chips">
+      <li>Zeal IT Consultants, Director, 2023–present</li>
+      <li>Uline, Software Architect, 2016–2023</li>
+      <li>Aon Hewitt, Sr. Application Development Tech Lead, 2006–2016</li>
+      <li>University of Wisconsin–Milwaukee, B.S. Computer Science</li>
+    </ul>
+  </header>
+
+  <section class="group" aria-labelledby="work-with">
+    <h2 id="work-with">How to work with George.</h2>
+    <div class="grid three">
+      <article class="card">
+        <span class="tag">Working together</span>
+        <h3>Lead with kindness and authenticity</h3>
+        <p>Skip the corporate pleasantries and posturing. Engage with him through direct, honest communication and genuine critical thinking. Say what you actually think. Raise concerns early. Disagree openly when you see a better path. Treat colleagues with the same respect he extends to his own team.</p>
+      </article>
+      <article class="card">
+        <span class="tag">Working together</span>
+        <h3>Focus on systemic solutions</h3>
+        <p>When something breaks, bring him an analysis of the workflow failure rather than a list of personal errors. The failure might be a deployment, a missed deadline, a defect in production, or a handoff between teams. Explain what in the process allowed it to happen. Propose a change that keeps it from happening again.</p>
+      </article>
+      <article class="card">
+        <span class="tag">Working together</span>
+        <h3>Embrace continuous optimization</h3>
+        <p>Be open to stripping away legacy administrative processes. Also be open to improving any part of how teams build software: requirements and planning, architecture and design, testing and quality, security, cloud infrastructure, DevOps pipelines, operations, and the team’s own ways of working.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="group" aria-labelledby="drives">
+    <h2 id="drives">What drives him.</h2>
+    <div class="grid three">
+      <article class="card">
+        <span class="tag">Motivation</span>
+        <h3>Why George leads</h3>
+        <ul class="points">
+          <li>
+            <h4>To eliminate developer burnout</h4>
+            <p>He steps into leadership to dismantle the “Improvement Trap.” In that trap, teams work longer hours instead of fixing systemic process friction.</p>
+          </li>
+          <li>
+            <h4>To build psychological safety</h4>
+            <p>He leads to protect his engineers from corporate blame. That protection gives them the safety to innovate and take calculated architectural risks.</p>
+          </li>
+          <li>
+            <h4>To bypass corporate red tape</h4>
+            <p>He uses his position to shield his teams from unnecessary administrative friction. His teams can then focus on high-value software delivery.</p>
+          </li>
+        </ul>
+      </article>
+      <article class="card">
+        <span class="tag">Values</span>
+        <h3>What George values</h3>
+        <ul class="points">
+          <li>
+            <h4>Authentic relationships</h4>
+            <p>He believes great software architecture starts with high social cohesion among engineers who genuinely care about one another.</p>
+          </li>
+          <li>
+            <h4>The “speed of trust”</h4>
+            <p>He prioritizes deep professional trust over heavy documentation. He sees trust as a hard economic driver that speeds up software cycles.</p>
+          </li>
+          <li>
+            <h4>Surgical efficiency</h4>
+            <p>He values automation and lean workflows that clear a path for developers over performative “hard work.”</p>
+          </li>
+        </ul>
+      </article>
+      <article class="card">
+        <span class="tag">Strengths</span>
+        <h3>George’s strengths</h3>
+        <ul class="points">
+          <li>
+            <h4>Surgical process optimization</h4>
+            <p>George doesn’t believe in the “work harder” myth. His greatest analytical strength is walking into an engineering ecosystem, evaluating a sluggish delivery lifecycle, finding the systemic bottleneck, and automating it out of existence.</p>
+          </li>
+          <li>
+            <h4>Cultivating high-trust, safe environments</h4>
+            <p>He believes that “great technology starts with great relationships.” That belief drives him to create authentic psychological safety. He leads with kindness and strips away corporate blame. As a result, his engineers feel comfortable taking calculated architectural risks. They focus on system fixes rather than defensive cover-ups.</p>
+          </li>
+          <li>
+            <h4>No-nonsense pragmatism</h4>
+            <p>He has zero tolerance for “corporate theater” or manufactured team-building. As an executive, he keeps technical consulting pure and practical. He anchors his team’s bonding in shared critical thinking and real-world problem-solving.</p>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="group" aria-labelledby="friction">
+    <h2 id="friction">Where friction shows up.</h2>
+    <div class="grid two">
+      <article class="card">
+        <span class="tag green">Struggles</span>
+        <h3>George’s struggles</h3>
+        <ul class="points">
+          <li>
+            <h4>Navigating rigid bureaucracies</h4>
+            <p>He hits a wall in slow-moving enterprise environments where multi-layered change management boards and manual approval gates govern the work.</p>
+          </li>
+          <li>
+            <h4>Performative corporate environments</h4>
+            <p>He struggles in companies that prioritize compliance optics, strict top-down KPIs, or weaponized engineering metrics.</p>
+          </li>
+          <li>
+            <h4>Managing hyper-isolated developers</h4>
+            <p>His relationship-driven model faces friction with “silo” developers who refuse to collaborate or integrate with the team’s shared culture.</p>
+          </li>
+        </ul>
+      </article>
+      <article class="card">
+        <span class="tag green">Triggers</span>
+        <h3>What pushes George’s buttons</h3>
+        <ul class="points">
+          <li>
+            <h4>“Corporate theater”</h4>
+            <p>Forced workplace bonding, mandatory compliance icebreakers, and artificial team-building exercises frustrate his preference for real interactions.</p>
+          </li>
+          <li>
+            <h4>Blame culture</h4>
+            <p>He strongly dislikes environments that blame individual engineers for an outage instead of analyzing systemic flaws.</p>
+          </li>
+          <li>
+            <h4>Unnecessary bottlenecks</h4>
+            <p>He dislikes leaders who demand their teams “work harder” or longer instead of letting him automate the broken workflows driving the slowdown.</p>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    Career details come from George’s public résumé (gutt.dev) and LinkedIn. The six profile areas are an interpretive summary, not statements from George himself.
+  </footer>
+
+</div>
+</body>
+</html>
